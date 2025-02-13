@@ -23,7 +23,7 @@ export const NavBar = () => {
         <li>
           <hr />
           <Link to={"/"} className="justify-between">
-            Profile
+            All Month
            
           </Link>
           <hr />

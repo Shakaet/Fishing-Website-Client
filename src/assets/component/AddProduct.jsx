@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 export default function AddProduct() {
   const [formData, setFormData] = useState({
+    projectNo: "",
     waterTreatment: "",
     feedAdditives: "",
     nh3: "",
@@ -18,26 +19,28 @@ export default function AddProduct() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Convert specific fields to numbers
+    const numericFields = ["mfu", "mfd", "efu", "efd"];
+    setFormData({
+      ...formData,
+      [name]: numericFields.includes(name) ? Number(value) || "" : value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("Form Data:", formData);
 
-    // console.log(formData)
-    // alert("Project Submitted Successfully!");
-
-    axios.post("http://localhost:3000/addProject",formData)
-    .then(res=>{
-      if(res.data.insertedId){
+    axios.post("http://localhost:3000/addProject", formData).then((res) => {
+      if (res.data.insertedId) {
         Swal.fire({
-          title: "Items added Successful!",
+          title: "Items added successfully!",
           icon: "success",
-          draggable: true
+          draggable: true,
         });
       }
-    })
+    });
   };
 
   return (
@@ -50,98 +53,50 @@ export default function AddProduct() {
           Water Treatment Project
         </h2>
 
+        {/* Project No Dropdown */}
         <div className="mb-4">
-          <label className="block font-medium text-gray-700">Water Treatment</label>
-          <input
-            type="text"
-            name="waterTreatment"
-            value={formData.waterTreatment}
+          <label className="block font-medium text-gray-700">Project No</label>
+          <select
+            name="projectNo"
+            value={formData.projectNo}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
         </div>
 
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">Feed Additives</label>
-          <input
-            type="text"
-            name="feedAdditives"
-            value={formData.feedAdditives}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
+        {/* Input Fields */}
+        {[
+          { label: "Water Treatment", name: "waterTreatment" },
+          { label: "Feed Additives", name: "feedAdditives" },
+          { label: "NH3", name: "nh3" },
+          { label: "PH3", name: "ph3" },
+          { label: "Morning Feed Up", name: "mfu" },
+          { label: "Morning Feed Down", name: "mfd" },
+          { label: "Evening Feed Up", name: "efu" },
+          { label: "Evening Feed Down", name: "efd" },
+        ].map((field) => (
+          <div className="mb-4" key={field.name}>
+            <label className="block font-medium text-gray-700">
+              {field.label}
+            </label>
+            <input
+              type={["mfu", "mfd", "efu", "efd"].includes(field.name) ? "number" : "text"}
+              name={field.name}
+              value={formData[field.name]}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+        ))}
 
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">NH3</label>
-          <input
-            type="text"
-            name="nh3"
-            value={formData.nh3}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">PH3</label>
-          <input
-            type="text"
-            name="ph3"
-            value={formData.ph3}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">Morning Feed Up</label>
-          <input
-            type="text"
-            name="mfu"
-            value={formData.ph3}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">Morning Feed Down</label>
-          <input
-            type="text"
-            name="mfd"
-            value={formData.ph3}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">Evening Feed Up</label>
-          <input
-            type="text"
-            name="efu"
-            value={formData.ph3}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block font-medium text-gray-700">Evening Feed Down</label>
-          <input
-            type="text"
-            name="efd"
-            value={formData.ph3}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
-
+        {/* Date Picker */}
         <div className="mb-4">
           <label className="block font-medium text-gray-700">Date</label>
           <input
@@ -154,6 +109,7 @@ export default function AddProduct() {
           />
         </div>
 
+        {/* Shift Selection */}
         <div className="mb-4">
           <label className="block font-medium text-gray-700">Shift</label>
           <select
@@ -167,6 +123,7 @@ export default function AddProduct() {
           </select>
         </div>
 
+        {/* Month Selection */}
         <div className="mb-4">
           <label className="block font-medium text-gray-700">Month</label>
           <select
@@ -175,15 +132,31 @@ export default function AddProduct() {
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((month) => (
-              <option key={month} value={month}>{month}</option>
+            {[
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ].map((month) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
             ))}
           </select>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-green-400 to-blue-500 text-white py-2 rounded-lg font-semibold shadow-md hover:scale-105 transition transform duration-300"
+          className="w-full bg-gradient-to-r from-fuchsia-900 to-purple-500 text-white py-2 rounded-lg font-semibold shadow-md hover:scale-105 transition transform duration-300"
         >
           Submit Project
         </button>
