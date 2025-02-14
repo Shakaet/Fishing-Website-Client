@@ -17,6 +17,7 @@ import { Octobor } from './assets/component/Octobor';
 import { Nov } from './assets/component/Nov';
 import { Dec } from './assets/component/Dec';
 import { Feb } from './assets/component/Feb';
+import { JanuaryUpdate } from './assets/component/JanuaryUpdate';
 
 
 
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
         {
           path:"/dec",
           element:<Dec></Dec>
+        },
+        {
+          path:"/janUpdate/:id",
+          element:<JanuaryUpdate></JanuaryUpdate>
         }
         
       ]

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const fetchData = async () => {
   const response = await axios.get("http://localhost:3000/octProject");
@@ -8,7 +9,7 @@ const fetchData = async () => {
 };
 
 export const Octobor = () => {
-  const { data } = useQuery({
+  const { data,refetch } = useQuery({
     queryKey: ["januaryProject"],
     queryFn: fetchData,
   });
@@ -29,6 +30,32 @@ export const Octobor = () => {
   console.log(totalSum)
   const totalSum2 = data?.reduce((sum, item) => sum + item.mfd + item.efd, 0);
   console.log(totalSum2)
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/octoborProject/${id}`)
+          .then((response) => {
+            if (response.data.deletedCount) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              refetch();
+            }
+          })
+          .catch(() => {
+            Swal.fire("Error!", "Failed to delete the item.", "error");
+          });
+      }
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -83,7 +110,7 @@ export const Octobor = () => {
                 Edit
               </button>
               <button
-                onClick={() => handleDelete(index)}
+                onClick={() => handleDelete(item._id)}
                 className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg shadow-md hover:scale-105 transition"
               >
                 Delete

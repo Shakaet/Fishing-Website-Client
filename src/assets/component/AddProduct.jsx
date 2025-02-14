@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function AddProduct() {
+
+
+  let nav= useNavigate()
   const [formData, setFormData] = useState({
     projectNo: "",
     waterTreatment: "",
@@ -34,11 +38,13 @@ export default function AddProduct() {
 
     axios.post("http://localhost:3000/addProject", formData).then((res) => {
       if (res.data.insertedId) {
+        
         Swal.fire({
           title: "Items added successfully!",
           icon: "success",
           draggable: true,
         });
+        nav("/")
       }
     });
   };
