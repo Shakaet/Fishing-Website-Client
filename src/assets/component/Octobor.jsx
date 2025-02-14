@@ -25,6 +25,10 @@ export const Octobor = () => {
       </h2>
     );
   }
+  const totalSum = data?.reduce((sum, item) => sum + item.mfu + item.efu, 0);
+  console.log(totalSum)
+  const totalSum2 = data?.reduce((sum, item) => sum + item.mfd + item.efd, 0);
+  console.log(totalSum2)
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -43,6 +47,10 @@ export const Octobor = () => {
             </option>
           ))}
         </select>
+      </div>
+      <div className="text-center text-xl mt-5 mb-5">
+        <h1 className="font-bold mb-2">Total Feed Up: {totalSum} kg</h1>
+        <h1 className="font-bold">Total Feed Down: {totalSum2} kg</h1>
       </div>
 
       <div className="flex flex-wrap justify-center items-center">

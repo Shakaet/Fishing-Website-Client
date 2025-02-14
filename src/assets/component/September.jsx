@@ -25,6 +25,10 @@ export const September = () => {
       </h2>
     );
   }
+  const totalSum = data?.reduce((sum, item) => sum + item.mfu + item.efu, 0);
+  console.log(totalSum)
+  const totalSum2 = data?.reduce((sum, item) => sum + item.mfd + item.efd, 0);
+  console.log(totalSum2)
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -44,6 +48,10 @@ export const September = () => {
           ))}
         </select>
       </div>
+      const totalSum = data?.reduce((sum, item) => sum + item.mfu + item.efu, 0);
+  console.log(totalSum)
+  const totalSum2 = data?.reduce((sum, item) => sum + item.mfd + item.efd, 0);
+  console.log(totalSum2)
 
       <div className="flex flex-wrap justify-center items-center">
         {filteredData?.reverse().map((item, index) => (
