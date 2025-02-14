@@ -36,7 +36,7 @@ export default function AddProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:3000/addProject", formData).then((res) => {
+    axios.post("https://fishing-project-server.vercel.app/addProject", formData).then((res) => {
       if (res.data.insertedId) {
         
         Swal.fire({

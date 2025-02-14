@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const fetchData = async () => {
-  const response = await axios.get("http://localhost:3000/sepProject");
+  const response = await axios.get("https://fishing-project-server.vercel.app/sepProject");
   return response.data;
 };
 
@@ -45,7 +45,7 @@ export const September = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/sepProject/${id}`)
+          .delete(`https://fishing-project-server.vercel.app/sepProject/${id}`)
           .then((response) => {
             if (response.data.deletedCount) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");

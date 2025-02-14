@@ -11,7 +11,7 @@ export const AugUp = () => {
 
   // Fetch data
   const fetchData = async () => {
-    const response = await axios.get(`http://localhost:3000/augDetails/${id}`);
+    const response = await axios.get(`https://fishing-project-server.vercel.app/augDetails/${id}`);
     return response.data;
   };
 
@@ -69,7 +69,7 @@ export const AugUp = () => {
   // Update data submission
   const updateProject = async (updatedData) => {
     const response = await axios.put(
-      `http://localhost:3000/augProject/${id}`,
+      `https://fishing-project-server.vercel.app/augProject/${id}`,
       updatedData
     );
     return response.data;
