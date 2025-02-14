@@ -4,9 +4,10 @@
 Fishing Project Management is a web application that allows users to add, manage, and track fish farming projects. Users can input data such as project number, pH3, NH3, morning and evening feed up/down (kg), date, and month. The application provides features to filter projects by project number, view detailed records for each month, edit or delete records, and calculate the total feed up/down.
 
 ## Live Link
-[Live Demo](https://verdant-profiterole-16ef11.netlify.app/) (Replace with actual deployed link)
+[Live Demo](https://verdant-profiterole-16ef11.netlify.app/) 
 
 ## Features
+
 - Add new fishing projects with details.
 - View, edit, and delete project records.
 - Filter projects by project number.
