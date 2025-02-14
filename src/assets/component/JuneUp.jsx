@@ -4,14 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-export const JanuaryUpdate = () => {
+export const JuneUp = () => {
   let { id } = useParams();
 
   let nav= useNavigate()
 
   // Fetch data
   const fetchData = async () => {
-    const response = await axios.get(`http://localhost:3000/januaryDetails/${id}`);
+    const response = await axios.get(`http://localhost:3000/juneDetails/${id}`);
     return response.data;
   };
 
@@ -69,7 +69,7 @@ export const JanuaryUpdate = () => {
   // Update data submission
   const updateProject = async (updatedData) => {
     const response = await axios.put(
-      `http://localhost:3000/januaryProject/${id}`,
+      `http://localhost:3000/juneProject/${id}`,
       updatedData
     );
     return response.data;
@@ -78,7 +78,7 @@ export const JanuaryUpdate = () => {
   const mutation = useMutation({
     mutationFn: updateProject,
     onSuccess: () => {
-        nav("/january")
+        nav("/june")
       Swal.fire("Success!", "Project updated successfully", "success");
     },
     onError: (error) => {

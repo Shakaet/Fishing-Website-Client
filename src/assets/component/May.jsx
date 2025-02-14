@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const fetchData = async () => {
@@ -16,22 +17,28 @@ export const May = () => {
   });
   
   const [selectedProjectNo, setSelectedProjectNo] = useState("all");
+ // Ensure data is always an array
+ const filteredData =
+ selectedProjectNo === "all"
+   ? data
+   : data.filter((item) => item.projectNo == selectedProjectNo);
 
-  // Filter data based on project number selection
-  const filteredData = selectedProjectNo === "all" ? data : data?.filter((item) => item.projectNo == selectedProjectNo);
+if (!data?.length) {
+ return (
+   <h2 className="text-center text-5xl font-bold mt-40 text-white py-10 px-10 bg-blue-800 flex justify-center items-center">
+     No data added in this month
+   </h2>
+ );
+}
 
-  if (data?.length === 0) {
-    return (
-      <h2 className="text-center text-5xl font-bold mt-40 text-white py-10 px-10 bg-blue-800 flex justify-center items-center">
-        No data added in this month
-      </h2>
-    );
-  }
+// Ensure calculations only run if data is available
+const totalSum = data.length
+ ? data.reduce((sum, item) => sum + (item.mfu || 0) + (item.efu || 0), 0)
+ : 0;
 
-  const totalSum = data?.reduce((sum, item) => sum + item.mfu + item.efu, 0);
-  console.log(totalSum)
-  const totalSum2 = data?.reduce((sum, item) => sum + item.mfd + item.efd, 0);
-  console.log(totalSum2)
+const totalSum2 = data.length
+ ? data.reduce((sum, item) => sum + (item.mfd || 0) + (item.efd || 0), 0)
+ : 0;
 
 
   const handleDelete = (id) => {
@@ -107,12 +114,13 @@ export const May = () => {
 
             {/* Edit & Delete Buttons */}
             <div className="mt-4 flex justify-between">
-              <button
-                onClick={() => handleEdit(index)}
+              <Link
+              to={`/MayUpdate/${item._id}`}
+                
                 className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-md hover:scale-105 transition"
               >
                 Edit
-              </button>
+              </Link>
               <button
                 onClick={() => handleDelete(item._id)}
                 className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg shadow-md hover:scale-105 transition"

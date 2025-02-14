@@ -5,9 +5,9 @@ export const NavBar = () => {
   return (
     <div>
 
-<div className="navbar bg-gradient-to-r from-fuchsia-900 to-purple-500">
+<div className="navbar bg-linear-to-t from-sky-500 to-indigo-500">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-2xl text-white hover:bg-fuchsia-950">Fishing Project</a>
+    <Link to={"/"} className="btn btn-ghost normal-case text-2xl text-white hover:bg-fuchsia-950">Fishing Project</Link>
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end">
@@ -19,7 +19,7 @@ export const NavBar = () => {
           <img src="/src/assets/mafu.jpg" />
         </div>
       </label>
-      <ul tabIndex={0} className="space-y-2 bg-gradient-to-r from-fuchsia-900 to-purple-500 text-white hover:text-blue-300 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52">
+      <ul tabIndex={0} className="space-y-2 bg-linear-to-t from-indigo-500 to-sky-500 text-white font-bold  hover:text-blue-300 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52">
         <li>
           <hr />
           <Link to={"/"} className="justify-between">
@@ -30,8 +30,8 @@ export const NavBar = () => {
         </li>
         <li><Link to={"/addProduct"}>Add New Project</Link></li>
         <hr />
-        <li><a>Logout</a></li>
-        <hr />
+        
+        
       </ul>
     </div>
   </div>

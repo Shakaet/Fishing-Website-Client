@@ -18,6 +18,17 @@ import { Nov } from './assets/component/Nov';
 import { Dec } from './assets/component/Dec';
 import { Feb } from './assets/component/Feb';
 import { JanuaryUpdate } from './assets/component/JanuaryUpdate';
+import { FebUp } from './assets/component/FebUp';
+import { MarchUp } from './assets/component/marchUp';
+import { DecUp } from './assets/component/DecUp';
+import { NovUp } from './assets/component/NovUp';
+import { OctUp } from './assets/component/OctUp';
+import { SepUp } from './assets/component/SepUp';
+import { AugUp } from './assets/component/AugUp';
+import { JulyUp } from './assets/component/JulyUp';
+import { JuneUp } from './assets/component/JuneUp';
+import { ApUp } from './assets/component/ApUp';
+import { MayUp } from './assets/component/MayUp';
 
 
 
@@ -85,7 +96,54 @@ const router = createBrowserRouter([
         {
           path:"/janUpdate/:id",
           element:<JanuaryUpdate></JanuaryUpdate>
-        }
+        },
+        {
+          path:"/febUpdate/:id",
+          element:<FebUp></FebUp>
+        },
+        {
+          path:"/marchUpdate/:id",
+          element:<MarchUp></MarchUp>
+        },
+        {
+          path:"/ApUpdate/:id",
+          element:<ApUp></ApUp>
+        },
+        {
+          path:"/MayUpdate/:id",
+          element:<MayUp></MayUp>
+        },
+        {
+          path:"/juneUpdate/:id",
+          element:<JuneUp></JuneUp>
+        },
+        {
+          path:"/julyUpdate/:id",
+          element:<JulyUp></JulyUp>
+        },
+        {
+          path:"/augUpdate/:id",
+          element:<AugUp></AugUp>
+        },
+        {
+          path:"/sepUpdate/:id",
+          element:<SepUp></SepUp>
+        },
+        {
+          path:"/octUpdate/:id",
+          element:<OctUp></OctUp>
+        },
+        {
+          path:"/novUpdate/:id",
+          element:<NovUp></NovUp>
+        },
+        {
+          path:"/decUpdate/:id",
+          element:<DecUp></DecUp>
+        },
+
+
+
         
       ]
     },
