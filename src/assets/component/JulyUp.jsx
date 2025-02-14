@@ -173,7 +173,7 @@ export const JulyUp = () => {
           </div>
 
           {/* Month Selection */}
-          
+
           {/* <div className="mb-4">
             <label className="block font-medium text-gray-700">Month</label>
             <select

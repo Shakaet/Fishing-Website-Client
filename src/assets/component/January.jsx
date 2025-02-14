@@ -10,28 +10,27 @@ const fetchData = async () => {
 };
 
 export const January = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isLoading, error } = useQuery({
     queryKey: ["januaryProject"],
     queryFn: fetchData,
   });
 
   const [selectedProjectNo, setSelectedProjectNo] = useState("all");
 
-  // Ensure data is an array before proceeding
+  if (isLoading) return <p className="text-center">Loading data...</p>;
+  if (error) return <p className="text-center text-red-500">Error fetching data.</p>;
+
+  // Ensure data is an array
+  const projectData = Array.isArray(data) ? data : [];
+
   const filteredData =
-    Array.isArray(data) && selectedProjectNo === "all"
-      ? data
-      : Array.isArray(data)
-      ? data.filter((item) => item.projectNo == selectedProjectNo)
-      : [];
+    selectedProjectNo === "all"
+      ? projectData
+      : projectData.filter((item) => item.projectNo == selectedProjectNo);
 
-  const totalSum = Array.isArray(data)
-    ? data.reduce((sum, item) => sum + item.mfu + item.efu, 0)
-    : 0;
-
-  const totalSum2 = Array.isArray(data)
-    ? data.reduce((sum, item) => sum + item.mfd + item.efd, 0)
-    : 0;
+  // Calculate totals based on filtered data
+  const totalSum = filteredData.reduce((sum, item) => sum + item.mfu + item.efu, 0);
+  const totalSum2 = filteredData.reduce((sum, item) => sum + item.mfd + item.efd, 0);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -69,12 +68,14 @@ export const January = () => {
           onChange={(e) => setSelectedProjectNo(e.target.value)}
         >
           <option value="all">All</option>
-          {[...new Set(filteredData?.map((item) => item.projectNo))]?.map(
-            (num) => (
+          {projectData.length > 0 ? (
+            [...new Set(projectData.map((item) => item.projectNo))]?.map((num) => (
               <option key={num} value={num}>
                 {num}
               </option>
-            )
+            ))
+          ) : (
+            <option disabled>No Projects</option>
           )}
         </select>
       </div>
@@ -85,7 +86,7 @@ export const January = () => {
       </div>
 
       <div className="flex flex-wrap justify-center items-center">
-        {filteredData?.reverse().map((item, index) => (
+        {filteredData.reverse().map((item, index) => (
           <div
             key={index}
             className={`shadow-lg rounded-xl p-6 m-4 max-w-xs w-full ${

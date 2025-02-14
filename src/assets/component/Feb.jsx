@@ -10,36 +10,29 @@ const fetchData = async () => {
 };
 
 export const Feb = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch,isLoading,error } = useQuery({
     queryKey: ["febProject"],
     queryFn: fetchData,
   });
 
   const [selectedProjectNo, setSelectedProjectNo] = useState("all");
 
-  // Check if data is an array and filter accordingly
+ 
+  if (isLoading) return <p className="text-center">Loading data...</p>;
+  if (error) return <p className="text-center text-red-500">Error fetching data.</p>;
+
+  // Ensure data is an array
+  const projectData = Array.isArray(data) ? data : [];
+
   const filteredData =
-    Array.isArray(data) && selectedProjectNo === "all"
-      ? data
-      : Array.isArray(data)
-      ? data.filter((item) => item.projectNo == selectedProjectNo)
-      : [];
+    selectedProjectNo === "all"
+      ? projectData
+      : projectData.filter((item) => item.projectNo == selectedProjectNo);
 
-  if (filteredData.length === 0) {
-    return (
-      <h2 className="text-center text-5xl font-bold mt-40 text-white py-10 px-10 bg-blue-800 flex justify-center items-center">
-        No data added in this month
-      </h2>
-    );
-  }
-
-  const totalSum = Array.isArray(data)
-    ? data.reduce((sum, item) => sum + item.mfu + item.efu, 0)
-    : 0;
-
-  const totalSum2 = Array.isArray(data)
-    ? data.reduce((sum, item) => sum + item.mfd + item.efd, 0)
-    : 0;
+  // Calculate totals based on filtered data
+  const totalSum = filteredData.reduce((sum, item) => sum + item.mfu + item.efu, 0);
+  const totalSum2 = filteredData.reduce((sum, item) => sum + item.mfd + item.efd, 0);
+ 
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -78,12 +71,14 @@ export const Feb = () => {
           onChange={(e) => setSelectedProjectNo(e.target.value)}
         >
           <option value="all">All</option>
-          {[...new Set(filteredData?.map((item) => item.projectNo))]?.map(
-            (num) => (
+          {projectData.length > 0 ? (
+            [...new Set(projectData.map((item) => item.projectNo))]?.map((num) => (
               <option key={num} value={num}>
                 {num}
               </option>
-            )
+            ))
+          ) : (
+            <option disabled>No Projects</option>
           )}
         </select>
       </div>

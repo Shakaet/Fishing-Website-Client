@@ -16,7 +16,7 @@ export const NavBar = () => {
     <div className="dropdown dropdown-end mt-5">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src="/src/assets/mafu.jpg" />
+        <img src="https://i.ibb.co/Kpk22PKy/mafu.jpg" alt="Mafu" />
         </div>
       </label>
       <ul tabIndex={0} className="space-y-2 bg-linear-to-t from-indigo-500 to-sky-500 text-white font-bold  hover:text-blue-300 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52">
