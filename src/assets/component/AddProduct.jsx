@@ -53,9 +53,9 @@ export default function AddProduct() {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-700 p-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-lg"
+        className="bg-gradient-to-r from-blue-500 to-purple-600 border-2 border-black shadow-lg rounded-xl p-6 md:p-8 w-full max-w-lg"
       >
-        <h2 className="text-2xl font-bold text-center text-indigo-700 mb-4">
+        <h2 className="text-2xl font-bold text-center text-black mb-4">
           Water Treatment Project
         </h2>
 
@@ -66,7 +66,7 @@ export default function AddProduct() {
             name="projectNo"
             value={formData.projectNo}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-2 border-black border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((num) => (
               <option key={num} value={num}>
@@ -96,8 +96,8 @@ export default function AddProduct() {
               name={field.name}
               value={formData[field.name]}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
+              className="w-full p-2 border-black border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              // required
             />
           </div>
         ))}
@@ -110,8 +110,8 @@ export default function AddProduct() {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
+            className="w-full p-2 border-black border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            // required
           />
         </div>
 
@@ -122,7 +122,7 @@ export default function AddProduct() {
             name="shift"
             value={formData.shift}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-2  border-black border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             <option value="morning">Morning</option>
             <option value="evening">Evening</option>
@@ -131,12 +131,13 @@ export default function AddProduct() {
 
         {/* Month Selection */}
         <div className="mb-4">
-          <label className="block font-medium text-gray-700">Month</label>
+          <label className="block font-medium  text-gray-700">Month</label>
           <select
+    
             name="month"
             value={formData.month}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-2  border-black border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             {[
               "January",
@@ -162,7 +163,7 @@ export default function AddProduct() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-fuchsia-900 to-purple-500 text-white py-2 rounded-lg font-semibold shadow-md hover:scale-105 transition transform duration-300"
+          className="w-full bg-gradient-to-r from-fuchsia-900 to-purple-500 text-black font-extrabold py-2 rounded-lg  shadow-md hover:scale-105 transition transform duration-300"
         >
           Submit Project
         </button>

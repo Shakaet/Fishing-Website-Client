@@ -61,7 +61,7 @@ export const May = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 p-6">
       {/* Project Number Filter */}
       <div className="flex justify-center mb-6">
         <label className="mr-4 font-bold">Filter by Project No:</label>

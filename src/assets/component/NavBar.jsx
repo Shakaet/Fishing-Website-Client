@@ -7,7 +7,7 @@ export const NavBar = () => {
 
 <div className="navbar bg-linear-to-t from-sky-500 to-indigo-500">
   <div className="flex-1">
-    <Link to={"/"} className="btn btn-ghost normal-case text-2xl text-white hover:bg-fuchsia-950">Fishing Project</Link>
+    <Link to={"/"} className="btn btn-ghost normal-case text-2xl text-white hover:bg-fuchsia-950">Mahfuz Aquaculture</Link>
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end">
